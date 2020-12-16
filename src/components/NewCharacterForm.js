@@ -19,6 +19,7 @@ function NewCharacterForm(props) {
       currentMP: 5,
       maxStamina: 10,
       currentStamina: 10,
+      currentLocation: {"x": 0, "y": 0, "z": 0},
       id: v4()
     });
   }

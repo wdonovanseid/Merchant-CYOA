@@ -21,14 +21,14 @@ export const createNewPlayerCharacter = playerCharacter => {
   }
 };
 
-export const deletePlayerCharacter = id => ({
+export const deletePlayerCharacter = (id) => ({
   type: c.DELETE_PLAYER_CHARACTER,
   id
 });
 
-export const selectPC = pc => ({
+export const selectPC = (pc) => ({
   type: c.SELECT_PLAYER_CHARACTER,
-  playerCharacter: pc
+  selectedPlayerCharacter: pc
 });
 
 export const unselectPC = ({

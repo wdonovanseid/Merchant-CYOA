@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import * as a from "./../actions/index.js";
 import NewCharacterForm from "./NewCharacterForm";
+import StartScreen from "./StartScreen";
+import GameControl from "./GameControl";
 
 class App extends React.Component {
 

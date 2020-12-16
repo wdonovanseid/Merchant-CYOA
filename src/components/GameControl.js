@@ -3,6 +3,41 @@ import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import * as a from './../actions/index.js';
 import * as api from './../actions/apiActions.js';
+import CharacterStatsScreen from './CharacterStatsScreen';
+import InventoryScreen from './InventoryScreen';
+import LevelUpForm from './LevelUpForm';
+import BattleScreen from './BattleScreen';
+import CurrentLocation from './CurrentLocation';
+import NavBar from './NavBar';
+import MapScreen from './MapScreen';
+import EventsLog from './EventsLog';
+
+const test = {
+  "locationTitle": "Cave",
+  "locationDescription": "Lorem ipsum",
+  "locationSpecificActions": [
+    {
+      "actionName": "Pick up Stick",
+      "onClick": function addItem(player){
+        player.inventory.push({
+          "itemName": "Stick",
+          "consume": false
+        });
+      }
+    },
+    {
+      "actionName": "Derp"
+    }
+  ],
+  "locationMovementsAvailable": [
+    {
+      "actionName": "Go North",
+      "onClick": function goNorth(player){
+        player.currentLocation["y"]+=1;
+      }
+    }
+  ]
+}
 
 class GameControl extends React.Component {
 
@@ -34,7 +69,7 @@ class GameControl extends React.Component {
     } else {
       currentlyVisibleState =
       <CurrentLocation
-        locationInfo={}
+        locationInfo={test}
         playerCharacter={this.props.selectedPlayerCharacter}
       />
     }
@@ -42,7 +77,7 @@ class GameControl extends React.Component {
       <React.Fragment>
         <NavBar
         
-          onClickingEndGame={props.onClickingEndGame}
+          // onClickingEndGame={props.onClickingEndGame}
         />
         {currentlyVisibleState}
         <MapScreen />
