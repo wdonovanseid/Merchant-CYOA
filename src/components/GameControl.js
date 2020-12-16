@@ -26,7 +26,10 @@ const test = {
       }
     },
     {
-      "actionName": "Derp"
+      "actionName": "Derp",
+      "onClick": function derp(player){
+        console.log("inventory", player.inventory)
+      }
     }
   ],
   "locationMovementActions": [
@@ -41,7 +44,13 @@ const test = {
 
 class GameControl extends React.Component {
 
+  handleCheckCharacterStats = () => {
+    this.props.dispatch(a.showCharacterStats);
+  }
 
+  handleCheckInventory = () => {
+    this.props.dispatch(a.showCharacterInventory);
+  }
 
   render() {
     let currentlyVisibleState = null;
@@ -53,7 +62,7 @@ class GameControl extends React.Component {
     } else if (this.props.currentGameContentScreen === "checkInventory") {
       currentlyVisibleState =
       <InventoryScreen
-        inventory={this.props.playerCharacter.inventory}
+        inventory={this.props.selectedPlayerCharacter.inventory}
       />
     } else if (this.props.currentGameContentScreen === "levelUp") {
       currentlyVisibleState =
@@ -76,12 +85,14 @@ class GameControl extends React.Component {
     return (
       <React.Fragment>
         <NavBar
-        
+          onClickingCharacterStats={this.handleCheckCharacterStats}
+          onClickingInventory={this.handleCheckInventory}
+          // onClickingSaveGame={this.handleSaveGameScreen}
           // onClickingEndGame={props.onClickingEndGame}
         />
         {currentlyVisibleState}
-        <MapScreen />
-        <EventsLog />
+        {/* <MapScreen /> */}
+        {/* <EventsLog /> */}
       </React.Fragment>
     );
   }

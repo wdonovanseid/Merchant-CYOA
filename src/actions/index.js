@@ -34,3 +34,23 @@ export const selectPC = (pc) => ({
 export const unselectPC = ({
   type: c.UNSELECT_PLAYER_CHARACTER
 });
+
+export const showCharacterStats = ({
+  type: c.SHOW_CHARACTER_INFO
+});
+
+export const showCharacterInventory = ({
+  type: c.SHOW_INVENTORY
+});
+
+export const showLevelUpForm = ({
+  type: c.SHOW_LEVEL_UP_FORM
+});
+
+export const showBattleScreen = ({
+  type: c.SHOW_BATTLE_SCREEN
+});
+
+export const showCurrentLocation = ({
+  type: c.SHOW_CURRENT_LOCATION
+});
