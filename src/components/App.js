@@ -15,23 +15,29 @@ class App extends React.Component {
     this.props.dispatch(a.showSplashScreen);
   }
 
+  handleShowCharacterForm = () => {
+    this.props.dispatch(a.showNewCharForm);
+  }
+
   render() {
     let currentlyVisibleStartingScreen = null;
     if (this.props.initialScreenToShow === "NEW_CHAR_FORM") {
       currentlyVisibleStartingScreen =
       <NewCharacterForm 
         onNewCharacterCreation={this.handleCreatingNewCharacter}
-        returnToStart={this.handleReturnToStart}
+        onClickingReturnToStart={this.handleReturnToStart}
       />
     } else if (this.props.initialScreenToShow === "START_GAME") {
       currentlyVisibleStartingScreen =
-      <GameControl 
+      <GameControl
         playerCharacter={this.props.playerCharacter}
-        endGame={this.handleReturnToStart}
+        onClickingEndGame={this.handleReturnToStart}
       />
     } else {
       currentlyVisibleStartingScreen =
-      <StartScreen />
+      <StartScreen 
+        onClickingStartNewGame={this.handleShowCharacterForm}
+      />
     }
     return (
       <React.Fragment>
