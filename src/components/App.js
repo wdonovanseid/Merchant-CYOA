@@ -8,10 +8,12 @@ class App extends React.Component {
 
   handleCreatingNewCharacter = (newPlayerCharacter) => {
     this.props.dispatch(a.createNewPlayerCharacter(newPlayerCharacter));
+    this.props.dispatch(a.selectPC(newPlayerCharacter));
     this.props.dispatch(a.startGame);
   }
 
   handleReturnToStart = () => {
+    this.props.dispatch(a.unselectPC);
     this.props.dispatch(a.showSplashScreen);
   }
 
@@ -23,19 +25,19 @@ class App extends React.Component {
     let currentlyVisibleStartingScreen = null;
     if (this.props.initialScreenToShow === "NEW_CHAR_FORM") {
       currentlyVisibleStartingScreen =
-      <NewCharacterForm 
+      <NewCharacterForm
         onNewCharacterCreation={this.handleCreatingNewCharacter}
         onClickingReturnToStart={this.handleReturnToStart}
       />
     } else if (this.props.initialScreenToShow === "START_GAME") {
       currentlyVisibleStartingScreen =
       <GameControl
-        playerCharacter={this.props.selectedPlayerCharacter}
+        // playerCharacter={this.props.selectedPlayerCharacter}
         onClickingEndGame={this.handleReturnToStart}
       />
     } else {
       currentlyVisibleStartingScreen =
-      <StartScreen 
+      <StartScreen
         onClickingStartNewGame={this.handleShowCharacterForm}
       />
     }
