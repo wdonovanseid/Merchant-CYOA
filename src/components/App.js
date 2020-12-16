@@ -30,7 +30,7 @@ class App extends React.Component {
     } else if (this.props.initialScreenToShow === "START_GAME") {
       currentlyVisibleStartingScreen =
       <GameControl
-        playerCharacter={this.props.playerCharacter}
+        playerCharacter={this.props.selectedPlayerCharacter}
         onClickingEndGame={this.handleReturnToStart}
       />
     } else {
@@ -49,11 +49,15 @@ class App extends React.Component {
 
 App.propTypes = {
   initialScreenToShow: PropTypes.string,
+  playerCharacterList: PropTypes.object,
+  selectedPlayerCharacter: PropTypes.object
 }
 
 const mapStateToProps = state => {
   return {
-    initialScreenToShow: state.initialScreenToShow
+    initialScreenToShow: state.initialScreenToShow,
+    playerCharacterList: state.playerCharacterList,
+    selectedPlayerCharacter: state.selectedPlayerCharacter
   }
 }
 
