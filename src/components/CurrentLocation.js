@@ -7,11 +7,11 @@ function CurrentLocation(props) {
     <React.Fragment>
       <h2>{locationTitle}</h2>
       <p>{locationDescription}</p>
-      {locationSpecificActions.map((action) =>
-        <button onClick={() => action.onClick(props.playerCharacter)}>{action.actionName}</button>
+      {locationSpecificActions.map((action, index) =>
+        <button key={index} onClick={() => action.onClick(props.playerCharacter)}>{action.actionName}</button>
       )}
-      {locationMovementActions.map((action) =>
-        <button onClick={() => action.onClick(props.playerCharacter)}>{action.actionName}</button>
+      {locationMovementActions.map((action, index) =>
+        <button key={index} onClick={() => action.onClick(props.playerCharacter)}>{action.actionName}</button>
       )}
     </React.Fragment>
   );

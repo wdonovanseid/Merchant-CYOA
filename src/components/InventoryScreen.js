@@ -3,16 +3,15 @@ import PropTypes from "prop-types";
 
 function InventoryScreen(props) {
   let currentInventory;
-  if (props.inventory.length < 1) {
+  if (props.playerCharacter.inventory.length < 1) {
     currentInventory =
     <p>You have nothing in your inventory</p>
   } else {
     currentInventory =
     <ul>
-      {props.inventory.map((item) => {
-        {console.log(item)}
-        <li>{item.itemName} {item["consume"] ? <button onClick={item.useItem}>Use</button> : ""}</li>
-      })}
+      {props.playerCharacter.inventory.map((item, index) => 
+        <li key={index}>{item.itemName} {item["consume"] ? <button onClick={item.useItem}>Use</button> : ""}</li>
+      )}
     </ul>
   }
   return (
@@ -26,7 +25,7 @@ function InventoryScreen(props) {
 }
 
 InventoryScreen.propTypes = {
-  inventory: PropTypes.array
+  playerCharacter: PropTypes.object
 };
 
 export default InventoryScreen;

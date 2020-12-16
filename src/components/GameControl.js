@@ -26,6 +26,20 @@ const test = {
       }
     },
     {
+      "actionName": "Pick up Potion",
+      "onClick": function addItem(player){
+        player.inventory.push({
+          "itemName": "Health Potion",
+          "consume": true,
+          "quantity": 3,
+          "onUse": function useItem(player){
+            player.currentHP+=5;
+            console.log("playerHP", player.currentHP)
+          }
+        });
+      }
+    },
+    {
       "actionName": "Derp",
       "onClick": function derp(player){
         console.log("inventory", player.inventory)
@@ -68,7 +82,7 @@ class GameControl extends React.Component {
     } else if (this.props.currentGameContentScreen === "checkInventory") {
       currentlyVisibleState =
       <InventoryScreen
-        inventory={this.props.selectedPlayerCharacter.inventory}
+        playerCharacter={this.props.selectedPlayerCharacter}
         onClickingReturn={this.handleReturnToLocationInfo}
       />
     } else if (this.props.currentGameContentScreen === "levelUp") {
