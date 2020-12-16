@@ -20,6 +20,7 @@ function NewCharacterForm(props) {
       maxStamina: 10,
       currentStamina: 10,
       currentLocation: {"x": 0, "y": 0, "z": 0},
+      inventory: [],
       id: v4()
     });
   }

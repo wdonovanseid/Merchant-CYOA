@@ -29,7 +29,7 @@ const test = {
       "actionName": "Derp"
     }
   ],
-  "locationMovementsAvailable": [
+  "locationMovementActions": [
     {
       "actionName": "Go North",
       "onClick": function goNorth(player){
