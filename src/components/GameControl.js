@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import * as a from './../actions/index.js';
+import * as api from './../actions/apiActions.js';
 
 class GameControl extends React.Component {
 
@@ -11,28 +12,31 @@ class GameControl extends React.Component {
     let currentlyVisibleState = null;
     if (this.props.currentGameContentScreen === "checkCharacter") {
       currentlyVisibleState =
-      <CharacterStatsScreen 
+      <CharacterStatsScreen
         playerCharacter={this.props.selectedPlayerCharacter}
       />
     } else if (this.props.currentGameContentScreen === "checkInventory") {
       currentlyVisibleState =
-      <InventoryScreen 
+      <InventoryScreen
         inventory={this.props.playerCharacter.inventory}
       />
     } else if (this.props.currentGameContentScreen === "levelUp") {
       currentlyVisibleState =
-      <LevelUpForm 
+      <LevelUpForm
         playerCharacter={this.props.selectedPlayerCharacter}
       />
     } else if (this.props.currentGameContentScreen === "inBattle") {
       currentlyVisibleState =
-      <BattleScreen 
+      <BattleScreen
         playerCharacter={this.props.selectedPlayerCharacter}
         enemyCharacters={this.props.currentEnemyEncounter}
       />
     } else {
       currentlyVisibleState =
-      <LocationInfo />
+      <CurrentLocation
+        locationInfo={}
+        playerCharacter={this.props.selectedPlayerCharacter}
+      />
     }
     return (
       <React.Fragment>

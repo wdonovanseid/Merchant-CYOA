@@ -32,7 +32,6 @@ class App extends React.Component {
     } else if (this.props.initialScreenToShow === "START_GAME") {
       currentlyVisibleStartingScreen =
       <GameControl
-        // playerCharacter={this.props.selectedPlayerCharacter}
         onClickingEndGame={this.handleReturnToStart}
       />
     } else {
