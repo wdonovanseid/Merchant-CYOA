@@ -37,6 +37,7 @@ const test = {
       "actionName": "Go North",
       "onClick": function goNorth(player){
         player.currentLocation["y"]+=1;
+        console.log(player)
       }
     }
   ]
@@ -52,17 +53,23 @@ class GameControl extends React.Component {
     this.props.dispatch(a.showCharacterInventory);
   }
 
+  handleReturnToLocationInfo = () => {
+    this.props.dispatch(a.showCurrentLocation);
+  }
+
   render() {
     let currentlyVisibleState = null;
     if (this.props.currentGameContentScreen === "checkCharacter") {
       currentlyVisibleState =
       <CharacterStatsScreen
         playerCharacter={this.props.selectedPlayerCharacter}
+        onClickingReturn={this.handleReturnToLocationInfo}
       />
     } else if (this.props.currentGameContentScreen === "checkInventory") {
       currentlyVisibleState =
       <InventoryScreen
         inventory={this.props.selectedPlayerCharacter.inventory}
+        onClickingReturn={this.handleReturnToLocationInfo}
       />
     } else if (this.props.currentGameContentScreen === "levelUp") {
       currentlyVisibleState =

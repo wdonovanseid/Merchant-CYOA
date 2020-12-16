@@ -18,6 +18,7 @@ function CharacterStatsScreen(props) {
           <li>Charisma: {charisma}</li>
         </ul>
         <hr />
+        <button onClick={props.onClickingReturn}>Return</button>
     </React.Fragment >
   );
 }
