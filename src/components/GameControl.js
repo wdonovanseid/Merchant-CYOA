@@ -37,7 +37,7 @@ const test = {
             if (player.currentHP>player.maxHP) {
               player.currentHP=player.maxHP;
             }
-            console.log("playerHP", player.currentHP)
+            console.log(player.name+" healed for "+player.currentHP)
           }
         });
       }
@@ -137,13 +137,14 @@ class GameControl extends React.Component {
         {currentlyVisibleState}
         {/* <MapScreen /> */}
         {/* <EventsLog /> */}
+        <div id="event-log"></div>
       </React.Fragment>
     );
   }
 }
 
 GameControl.propTypes = {
-  onClickingEndGame: PropTypes.func,
+  // onClickingEndGame: PropTypes.func,
   currentGameContentScreen: PropTypes.string,
   selectedPlayerCharacter: PropTypes.object,
 
