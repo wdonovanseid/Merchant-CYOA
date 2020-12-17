@@ -18,9 +18,8 @@ function InventoryScreen(props) {
     <React.Fragment>
         <h4>Inventory</h4>
         {currentInventory}
-        <hr />
         <button onClick={props.onClickingReturn}>Return</button>
-    </React.Fragment >
+    </React.Fragment>
   );
 }
 

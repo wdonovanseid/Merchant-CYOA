@@ -13,6 +13,7 @@ import MapScreen from './MapScreen';
 import EventsLog from './EventsLog';
 
 const test = {
+  "locationMapIcon": "",
   "locationTitle": "Cave",
   "locationDescription": "Lorem ipsum",
   "locationSpecificActions": [
@@ -135,9 +136,12 @@ class GameControl extends React.Component {
           // onClickingEndGame={props.onClickingEndGame}
         />
         {currentlyVisibleState}
-        {/* <MapScreen /> */}
-        {/* <EventsLog /> */}
-        <div id="event-log"></div>
+        <MapScreen 
+          mapIcon={test.locationMapIcon}
+        />
+        <EventsLog 
+          
+        />
       </React.Fragment>
     );
   }
