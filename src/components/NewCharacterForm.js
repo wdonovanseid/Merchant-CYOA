@@ -26,31 +26,32 @@ function NewCharacterForm(props) {
   }
   return (
     <React.Fragment>
+      <h2>Make a new Character</h2>
         <form onSubmit={handleNewCharacterFormSubmission}>
-            <p>Name: <input
-              type='text'
-              name='name'
-              placeholder='Name'
-              required /></p>
-            <p>Strength: <input
-              type='number'
-              name='strength'
-              defaultValue={1} /></p>
-            <p>Dexterity: <input
-              type='number'
-              name='dexterity'
-              defaultValue={1} /></p>
-            <p>Intelligence: <input
-              type='number'
-              name='intelligence'
-              defaultValue={1} /></p>
-            <p>Charisma: <input
-              type='number'
-              name='charisma'
-              defaultValue={1} /></p>
+          <p>Name: <input
+            type='text'
+            name='name'
+            placeholder='Name'
+            required /></p>
+          <p>Strength: <input
+            type='number'
+            name='strength'
+            defaultValue={1} /></p>
+          <p>Dexterity: <input
+            type='number'
+            name='dexterity'
+            defaultValue={1} /></p>
+          <p>Intelligence: <input
+            type='number'
+            name='intelligence'
+            defaultValue={1} /></p>
+          <p>Charisma: <input
+            type='number'
+            name='charisma'
+            defaultValue={1} /></p>
           <button type="submit" className="btn btn-primary">Start Game</button>
         </form>
-        <button type="button" onClick={props.onClickingReturnToStart}>Return to Start Screen</button>
+      <button type="button" onClick={props.onClickingReturnToStart}>Return to Start Screen</button>
     </React.Fragment>
   );
 }

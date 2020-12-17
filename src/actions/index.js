@@ -12,6 +12,10 @@ export const showNewCharForm = ({
   type: c.SHOW_NEW_CHARACTER_FORM
 });
 
+export const showSavedGames =({
+  type: c.SHOW_SAVED_GAMES
+});
+
 export const createNewPlayerCharacter = playerCharacter => {
   const {name, id} = playerCharacter;
   return {

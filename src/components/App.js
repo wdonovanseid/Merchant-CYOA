@@ -5,6 +5,7 @@ import * as a from "./../actions/index.js";
 import NewCharacterForm from "./NewCharacterForm";
 import StartScreen from "./StartScreen";
 import GameControl from "./GameControl";
+import Saves from "./Saves";
 
 class App extends React.Component {
 
@@ -23,6 +24,10 @@ class App extends React.Component {
     this.props.dispatch(a.showNewCharForm);
   }
 
+  handleShowSavedGames = () => {
+    this.props.dispatch(a.showSavedGames);
+  }
+
   render() {
     let currentlyVisibleStartingScreen = null;
     if (this.props.initialScreenToShow === "NEW_CHAR_FORM") {
@@ -36,10 +41,14 @@ class App extends React.Component {
       <GameControl
         onClickingEndGame={this.handleReturnToStart}
       />
+    } else if (this.props.initialScreenToShow === "SHOW_SAVED_GAMES") {
+      currentlyVisibleStartingScreen =
+      <Saves />
     } else {
       currentlyVisibleStartingScreen =
       <StartScreen
         onClickingStartNewGame={this.handleShowCharacterForm}
+        onClickingLoadGame={this.handleShowSavedGames}
       />
     }
     return (

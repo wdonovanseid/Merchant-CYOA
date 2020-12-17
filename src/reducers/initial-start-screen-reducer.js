@@ -11,6 +11,9 @@ export default (state = "SPLASH_SCREEN", action) => {
     case c.SHOW_SPLASH_SCREEN:
       const newState3 = "SPLASH_SCREEN";
       return newState3;
+    case c.SHOW_SAVED_GAMES:
+      const newState4 = "SHOW_SAVED_GAMES";
+      return newState4;
     default:
       return state;
     }
