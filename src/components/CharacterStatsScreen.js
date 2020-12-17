@@ -17,6 +17,7 @@ function CharacterStatsScreen(props) {
           <li>Intelligence: {intelligence}</li>
           <li>Charisma: {charisma}</li>
         </ul>
+        {props.playerCharacter.exp>99 && <button onClick={props.onClickingLevelUp}>Level Up!</button>}
         <hr />
         <button onClick={props.onClickingReturn}>Return</button>
     </React.Fragment >
@@ -24,7 +25,9 @@ function CharacterStatsScreen(props) {
 }
 
 CharacterStatsScreen.propTypes = {
-  playerCharacter: PropTypes.object
+  playerCharacter: PropTypes.object,
+  onClickingReturn: PropTypes.func,
+  onClickingLevelUp: PropTypes.func
 };
 
 export default CharacterStatsScreen;

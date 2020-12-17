@@ -34,7 +34,23 @@ const test = {
           "quantity": 3,
           "onUse": function useItem(player){
             player.currentHP+=5;
+            if (player.currentHP>player.maxHP) {
+              player.currentHP=player.maxHP;
+            }
             console.log("playerHP", player.currentHP)
+          }
+        });
+      }
+    },
+    {
+      "actionName": "Pick up EXP Potion",
+      "onClick": function addItem(player){
+        player.inventory.push({
+          "itemName": "EXP Potion",
+          "consume": true,
+          "quantity": 3,
+          "onUse": function useItem(player){
+            player.exp+=50;
           }
         });
       }
@@ -71,6 +87,10 @@ class GameControl extends React.Component {
     this.props.dispatch(a.showCurrentLocation);
   }
 
+  handleShowLevelUpForm = () => {
+    this.props.dispatch(a.showLevelUpForm);
+  }
+
   render() {
     let currentlyVisibleState = null;
     if (this.props.currentGameContentScreen === "checkCharacter") {
@@ -78,6 +98,7 @@ class GameControl extends React.Component {
       <CharacterStatsScreen
         playerCharacter={this.props.selectedPlayerCharacter}
         onClickingReturn={this.handleReturnToLocationInfo}
+        onClickingLevelUp={this.handleShowLevelUpForm}
       />
     } else if (this.props.currentGameContentScreen === "checkInventory") {
       currentlyVisibleState =
@@ -89,6 +110,7 @@ class GameControl extends React.Component {
       currentlyVisibleState =
       <LevelUpForm
         playerCharacter={this.props.selectedPlayerCharacter}
+        onClickingReturnToCharacterStats={this.handleCheckCharacterStats}
       />
     } else if (this.props.currentGameContentScreen === "inBattle") {
       currentlyVisibleState =
@@ -106,6 +128,7 @@ class GameControl extends React.Component {
     return (
       <React.Fragment>
         <NavBar
+          expCheck={this.props.selectedPlayerCharacter.exp}
           onClickingCharacterStats={this.handleCheckCharacterStats}
           onClickingInventory={this.handleCheckInventory}
           // onClickingSaveGame={this.handleSaveGameScreen}
