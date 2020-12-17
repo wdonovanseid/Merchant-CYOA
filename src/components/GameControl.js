@@ -135,13 +135,17 @@ class GameControl extends React.Component {
           // onClickingSaveGame={this.handleSaveGameScreen}
           // onClickingEndGame={props.onClickingEndGame}
         />
-        {currentlyVisibleState}
-        <MapScreen 
-          mapIcon={test.locationMapIcon}
-        />
-        <EventsLog 
-          
-        />
+        <div className="row">
+          <div className="col-6">
+            {currentlyVisibleState}
+          </div>
+          <div className="col-6">
+            <MapScreen 
+            mapIcon={test.locationMapIcon}
+          />
+            <EventsLog />
+          </div>
+        </div>
       </React.Fragment>
     );
   }

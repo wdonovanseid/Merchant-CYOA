@@ -10,6 +10,7 @@ function CurrentLocation(props) {
       {locationSpecificActions.map((action, index) =>
         <button key={index} onClick={() => action.onClick(props.playerCharacter)}>{action.actionName}</button>
       )}
+      <hr />
       {locationMovementActions.map((action, index) =>
         <button key={index} onClick={() => action.onClick(props.playerCharacter)}>{action.actionName}</button>
       )}
