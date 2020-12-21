@@ -8,7 +8,7 @@ function CurrentLocation(props) {
       <h2>{locationTitle}</h2>
       <p>{locationDescription}</p>
       {locationSpecificActions.map((action, index) =>
-        <button key={index} onClick={() => action.onClick(props.playerCharacter)}>{action.actionName}</button>
+        {action.eventTrigger && <button key={index} onClick={() => action.onClick(props.playerCharacter, action)}>{action.actionName}</button>}
       )}
       <hr />
       {locationMovementActions.map((action, index) =>

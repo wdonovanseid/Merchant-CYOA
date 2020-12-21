@@ -13,13 +13,16 @@ import MapScreen from './MapScreen';
 import EventsLog from './EventsLog';
 
 const test = {
+  "locationCoordinates": { "x": 0, "y": 0, "z": 0},
   "locationMapIcon": "",
   "locationTitle": "Cave",
   "locationDescription": "Lorem ipsum",
   "locationSpecificActions": [
     {
       "actionName": "Pick up Stick",
-      "onClick": function addItem(player){
+      "eventTrigger": true,
+      "onClick": function addItem(player, action){
+        action.eventTrigger = false;
         player.inventory.push({
           "itemName": "Stick",
           "consume": false
@@ -28,16 +31,18 @@ const test = {
     },
     {
       "actionName": "Pick up Potion",
+      "eventTrigger": true,
       "onClick": function addItem(player){
         player.inventory.push({
           "itemName": "Health Potion",
           "consume": true,
           "quantity": 3,
-          "onUse": function useItem(player){
+          "onUse": function useItem(player, item){
             player.currentHP+=5;
             if (player.currentHP>player.maxHP) {
               player.currentHP=player.maxHP;
             }
+            item.quantity-=1;
             console.log(player.name+" healed for "+player.currentHP)
           }
         });
