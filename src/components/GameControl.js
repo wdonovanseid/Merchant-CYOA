@@ -12,72 +12,97 @@ import NavBar from './NavBar';
 import MapScreen from './MapScreen';
 import EventsLog from './EventsLog';
 
-const test = {
-  "locationCoordinates": { "x": 0, "y": 0, "z": 0},
-  "locationMapIcon": "",
-  "locationTitle": "Cave",
-  "locationDescription": "Lorem ipsum",
-  "locationSpecificActions": [
-    {
-      "actionName": "Pick up Stick",
-      "eventTrigger": true,
-      "onClick": function addItem(player, action){
-        action.eventTrigger = false;
-        player.inventory.push({
-          "itemName": "Stick",
-          "consume": false
-        });
-      }
-    },
-    {
-      "actionName": "Pick up Potion",
-      "eventTrigger": true,
-      "onClick": function addItem(player){
-        player.inventory.push({
-          "itemName": "Health Potion",
-          "consume": true,
-          "quantity": 3,
-          "onUse": function useItem(player, item){
-            player.currentHP+=5;
-            if (player.currentHP>player.maxHP) {
-              player.currentHP=player.maxHP;
+const testLocationArray = [
+  {
+    "locationCoordinates": {"x": 0, "y": 0, "z": 0},
+    "locationMapIcon": "",
+    "locationTitle": "Cave",
+    "locationDescription": "Lorem ipsum",
+    "locationSpecificActions": [
+      {
+        "actionName": "Pick up Stick",
+        "eventTrigger": true,
+        "onClick": function addItem(player, action){
+          action.eventTrigger = false;
+          player.inventory.push({
+            "itemName": "Stick",
+            "consume": false
+          });
+        }
+      },
+      {
+        "actionName": "Pick up Potion",
+        "eventTrigger": true,
+        "onClick": function addItem(player){
+          player.inventory.push({
+            "itemName": "Health Potion",
+            "consume": true,
+            "quantity": 3,
+            "onUse": function useItem(player, item){
+              player.currentHP+=5;
+              if (player.currentHP>player.maxHP) {
+                player.currentHP=player.maxHP;
+              }
+              item.quantity-=1;
+              if (item.quantity <= 0) {
+                player.inventory.filter(x => x.itemName !== item.itemName);
+                console.log(item)
+                console.log(player.inventory)
+              }
+              console.log(player.name+" healed for "+player.currentHP)
             }
-            item.quantity-=1;
-            console.log(player.name+" healed for "+player.currentHP)
-          }
-        });
+          });
+        }
+      },
+      {
+        "actionName": "Pick up test EXP Potion",
+        "eventTrigger": true,
+        "onClick": function addItem(player){
+          player.inventory.push({
+            "itemName": "test EXP Potion",
+            "consume": true,
+            "quantity": 3,
+            "onUse": function useItem(player){
+              player.exp+=50;
+            }
+          });
+        }
+      },
+      {
+        "actionName": "Derp",
+        "eventTrigger": true,
+        "onClick": function derp(player){
+          console.log("inventory", player.inventory)
+        }
       }
-    },
-    {
-      "actionName": "Pick up EXP Potion",
-      "onClick": function addItem(player){
-        player.inventory.push({
-          "itemName": "EXP Potion",
-          "consume": true,
-          "quantity": 3,
-          "onUse": function useItem(player){
-            player.exp+=50;
-          }
-        });
+    ],
+    "locationMovementActions": [
+      {
+        "actionName": "Go North",
+        "onClick": function goNorth(player){
+          player.currentLocation["y"]+=1;
+          console.log(player)
+        }
       }
-    },
-    {
-      "actionName": "Derp",
-      "onClick": function derp(player){
-        console.log("inventory", player.inventory)
+    ]
+  },
+  {
+    "locationCoordinates": {"x": 0, "y": 1, "z": 0},
+    "locationMapIcon": "",
+    "locationTitle": "Outside of Cave",
+    "locationDescription": "Lorem ipsum",
+    "locationSpecificActions": [],
+    "locationMovementActions": [
+      {
+        "actionName": "Go South",
+        "onClick": function goSouth(player){
+          player.currentLocation["y"]-=1;
+          console.log(player)
+        }
       }
-    }
-  ],
-  "locationMovementActions": [
-    {
-      "actionName": "Go North",
-      "onClick": function goNorth(player){
-        player.currentLocation["y"]+=1;
-        console.log(player)
-      }
-    }
-  ]
-}
+    ]
+  }
+]
 
 class GameControl extends React.Component {
 
@@ -99,6 +124,8 @@ class GameControl extends React.Component {
 
   render() {
     let currentlyVisibleState = null;
+    let testLocation = testLocationArray.find(x => x.locationCoordinates === this.props.selectedPlayerCharacter.currentLocation);
+    console.log(testLocation)
     if (this.props.currentGameContentScreen === "checkCharacter") {
       currentlyVisibleState =
       <CharacterStatsScreen
@@ -127,7 +154,7 @@ class GameControl extends React.Component {
     } else {
       currentlyVisibleState =
       <CurrentLocation
-        locationInfo={test}
+        locationInfo={testLocation}
         playerCharacter={this.props.selectedPlayerCharacter}
       />
     }
@@ -146,7 +173,7 @@ class GameControl extends React.Component {
           </div>
           <div className="col-6">
             <MapScreen 
-            mapIcon={test.locationMapIcon}
+            mapIcon={testLocation.locationMapIcon}
           />
             <EventsLog />
           </div>
