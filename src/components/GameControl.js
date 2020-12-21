@@ -79,8 +79,9 @@ const testLocationArray = [
     "locationMovementActions": [
       {
         "actionName": "Go North",
-        "onClick": function goNorth(player){
+        "onClick": function goNorth(player, refreshFunc){
           player.currentLocation["y"]+=1;
+          refreshFunc();
           console.log(player)
         }
       }
@@ -122,6 +123,10 @@ class GameControl extends React.Component {
     this.props.dispatch(a.showLevelUpForm);
   }
 
+  handleRefresh = () => {
+    this.props.dispatch(a.refresh);
+  }
+
   render() {
     let currentlyVisibleState = null;
     let playerLocation = this.props.selectedPlayerCharacter.currentLocation;
@@ -156,6 +161,7 @@ class GameControl extends React.Component {
       <CurrentLocation
         locationInfo={testLocation}
         playerCharacter={this.props.selectedPlayerCharacter}
+        refresh={this.handleRefresh}
       />
     }
     return (
@@ -187,13 +193,14 @@ GameControl.propTypes = {
   // onClickingEndGame: PropTypes.func,
   currentGameContentScreen: PropTypes.string,
   selectedPlayerCharacter: PropTypes.object,
-
+  refreshState: PropTypes.bool
 };
 
 const mapStateToProps = state => {
   return {
     currentGameContentScreen: state.currentGameContentScreen,
     selectedPlayerCharacter: state.selectedPlayerCharacter,
+    refreshState: state.refreshState
   }
 }
 

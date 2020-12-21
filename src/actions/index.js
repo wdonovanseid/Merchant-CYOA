@@ -58,3 +58,7 @@ export const showBattleScreen = ({
 export const showCurrentLocation = ({
   type: c.SHOW_CURRENT_LOCATION
 });
+
+export const refresh = ({
+  type: c.REFRESH
+});
