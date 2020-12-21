@@ -51,7 +51,14 @@ const testLocationArray = [
               }
               item.quantity-=1;
               if (item.quantity <= 0) {
-                player.inventory.filter(playerItem => console.log(playerItem) && playerItem.itemName !== "Health Potion");
+                let temp = []
+                for (let i=0; i<player.inventory.length; i++) {
+                  if (player.inventory[i].itemName !== "Health Potion") {
+                    temp.push(player.inventory[i])
+                  }
+                }
+                player.inventory = temp;
+                // player.inventory.filter(playerItem => console.log(playerItem) && playerItem.itemName == "Health Potion");
                 console.log(item.itemName)
                 console.log(player.inventory)
               }
