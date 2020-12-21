@@ -38,9 +38,7 @@ class App extends React.Component {
       />
     } else if (this.props.initialScreenToShow === "START_GAME") {
       currentlyVisibleStartingScreen =
-      <GameControl
-        onClickingEndGame={this.handleReturnToStart}
-      />
+      <GameControl />
     } else if (this.props.initialScreenToShow === "SHOW_SAVED_GAMES") {
       currentlyVisibleStartingScreen =
       <Saves />

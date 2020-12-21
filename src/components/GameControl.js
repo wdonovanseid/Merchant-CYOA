@@ -143,6 +143,11 @@ class GameControl extends React.Component {
     this.props.dispatch(a.showCurrentLocation)
   }
 
+  handleReturnToStart = () => {
+    this.props.dispatch(a.unselectPC);
+    this.props.dispatch(a.showSplashScreen);
+  }
+
   handleRefresh = () => {
     this.props.dispatch(a.refresh);
   }
@@ -193,7 +198,7 @@ class GameControl extends React.Component {
           onClickingCharacterStats={this.handleCheckCharacterStats}
           onClickingInventory={this.handleCheckInventory}
           // onClickingSaveGame={this.handleSaveGameScreen}
-          // onClickingEndGame={props.onClickingEndGame}
+          onClickingEndGame={this.handleReturnToStart}
         />
         <div className="row">
           <div className="col-6">
@@ -212,7 +217,6 @@ class GameControl extends React.Component {
 }
 
 GameControl.propTypes = {
-  // onClickingEndGame: PropTypes.func,
   currentGameContentScreen: PropTypes.string,
   playerCharacterList: PropTypes.object,
   selectedPlayerCharacter: PropTypes.object,
