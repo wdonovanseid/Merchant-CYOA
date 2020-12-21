@@ -124,15 +124,8 @@ class GameControl extends React.Component {
 
   render() {
     let currentlyVisibleState = null;
-    console.log("test Array: ", testLocationArray[0].locationCoordinates)
-    console.log("player location", this.props.selectedPlayerCharacter.currentLocation)
-    if (testLocationArray[0].locationCoordinates === this.props.selectedPlayerCharacter.currentLocation) {
-      console.log("equal")
-    }
-    let testIndex = testLocationArray.findIndex(x => x.locationCoordinates === this.props.selectedPlayerCharacter.currentLocation);
-    console.log(testIndex)
-    let testLocation = testLocationArray[testIndex];
-    console.log(testLocation)
+    let playerLocation = this.props.selectedPlayerCharacter.currentLocation;
+    let testLocation = testLocationArray.find(loc => loc.locationCoordinates.x === playerLocation.x && loc.locationCoordinates.y === playerLocation.y && loc.locationCoordinates.z === playerLocation.z);
     if (this.props.currentGameContentScreen === "checkCharacter") {
       currentlyVisibleState =
       <CharacterStatsScreen
