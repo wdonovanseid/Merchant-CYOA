@@ -28,7 +28,6 @@ const testLocationArray = [
             "itemName": "Stick",
             "consume": false
           });
-          this.props.dispatch();
         }
       },
       {
@@ -51,7 +50,6 @@ const testLocationArray = [
                 console.log(player.inventory)
               }
               console.log(player.name+" healed for "+player.currentHP)
-              this.props.dispatch();
             }
           });
         }
@@ -128,7 +126,12 @@ class GameControl extends React.Component {
     let currentlyVisibleState = null;
     console.log("test Array: ", testLocationArray[0].locationCoordinates)
     console.log("player location", this.props.selectedPlayerCharacter.currentLocation)
-    let testLocation = testLocationArray.find(x => x.locationCoordinates === this.props.selectedPlayerCharacter.currentLocation);
+    if (testLocationArray[0].locationCoordinates === this.props.selectedPlayerCharacter.currentLocation) {
+      console.log("equal")
+    }
+    let testIndex = testLocationArray.findIndex(x => x.locationCoordinates === this.props.selectedPlayerCharacter.currentLocation);
+    console.log(testIndex)
+    let testLocation = testLocationArray[testIndex];
     console.log(testLocation)
     if (this.props.currentGameContentScreen === "checkCharacter") {
       currentlyVisibleState =
