@@ -8,11 +8,7 @@ function CurrentLocation(props) {
       <h2>{locationTitle}</h2>
       <p>{locationDescription}</p>
       {locationSpecificActions.map((action, index) =>
-        // function tempOnClick(player, action) {
-        //   action.onClick(player, action)
-        //   props.refresh();
-        // };
-        action.eventTrigger && <button key={index} onClick={() => action.onClick(props.playerCharacter, action)}>{action.actionName}</button>
+        action.eventTrigger && <button key={index} onClick={() => action.onClick(props.playerCharacter, action, props.refresh)}>{action.actionName}</button>
       )}
       <hr />
       {locationMovementActions.map((action, index) =>
@@ -24,7 +20,8 @@ function CurrentLocation(props) {
 
 CurrentLocation.propTypes = {
   playerCharacter: PropTypes.object,
-  locationInfo: PropTypes.object
+  locationInfo: PropTypes.object,
+  refresh: PropTypes.func
 };
 
 export default CurrentLocation;

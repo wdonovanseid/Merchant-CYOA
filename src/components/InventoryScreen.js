@@ -10,7 +10,7 @@ function InventoryScreen(props) {
     currentInventory =
     <ul>
       {props.playerCharacter.inventory.map((item, index) => 
-        <li key={index}>{item.itemName} {item.quantity>1 && "x"+item.quantity} {item.consume && <button onClick={() => item.onUse(props.playerCharacter, item)}>Use</button>}</li>
+        <li key={index}>{item.itemName} {item.quantity>1 && "x"+item.quantity} {item.consume && <button onClick={() => item.onUse(props.playerCharacter, item, props.refresh)}>Use</button>}</li>
       )}
     </ul>
   }
@@ -24,7 +24,8 @@ function InventoryScreen(props) {
 }
 
 InventoryScreen.propTypes = {
-  playerCharacter: PropTypes.object
+  playerCharacter: PropTypes.object,
+  refresh: PropTypes.func
 };
 
 export default InventoryScreen;

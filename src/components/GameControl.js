@@ -22,23 +22,25 @@ const testLocationArray = [
       {
         "actionName": "Pick up Stick",
         "eventTrigger": true,
-        "onClick": function addItem(player, action){
+        "onClick": function addItem(player, action, refreshFunc){
           action.eventTrigger = false;
           player.inventory.push({
             "itemName": "Stick",
             "consume": false
           });
+          refreshFunc();
         }
       },
       {
         "actionName": "Pick up Potion",
         "eventTrigger": true,
-        "onClick": function addItem(player){
+        "onClick": function addItem(player, action, refreshFunc){
+          action.eventTrigger = false;
           player.inventory.push({
             "itemName": "Health Potion",
             "consume": true,
             "quantity": 3,
-            "onUse": function useItem(player, item){
+            "onUse": function useItem(player, item, refreshFunc){
               player.currentHP+=5;
               if (player.currentHP>player.maxHP) {
                 player.currentHP=player.maxHP;
@@ -49,23 +51,28 @@ const testLocationArray = [
                 console.log(item)
                 console.log(player.inventory)
               }
+              refreshFunc();
               console.log(player.name+" healed for "+player.currentHP)
             }
           });
+          refreshFunc();
         }
       },
       {
         "actionName": "Pick up test EXP Potion",
         "eventTrigger": true,
-        "onClick": function addItem(player){
+        "onClick": function addItem(player, action, refreshFunc){
+          action.eventTrigger = false;
           player.inventory.push({
             "itemName": "test EXP Potion",
             "consume": true,
             "quantity": 3,
-            "onUse": function useItem(player){
+            "onUse": function useItem(player, item, refreshFunc){
               player.exp+=50;
+              refreshFunc();
             }
           });
+          refreshFunc();
         }
       },
       {
@@ -96,8 +103,9 @@ const testLocationArray = [
     "locationMovementActions": [
       {
         "actionName": "Go South",
-        "onClick": function goSouth(player){
+        "onClick": function goSouth(player, refreshFunc){
           player.currentLocation["y"]-=1;
+          refreshFunc();
           console.log(player)
         }
       } 
@@ -143,6 +151,7 @@ class GameControl extends React.Component {
       <InventoryScreen
         playerCharacter={this.props.selectedPlayerCharacter}
         onClickingReturn={this.handleReturnToLocationInfo}
+        refresh={this.handleRefresh}
       />
     } else if (this.props.currentGameContentScreen === "levelUp") {
       currentlyVisibleState =
