@@ -28,6 +28,7 @@ const testLocationArray = [
             "itemName": "Stick",
             "consume": false
           });
+          this.props.dispatch();
         }
       },
       {
@@ -45,11 +46,12 @@ const testLocationArray = [
               }
               item.quantity-=1;
               if (item.quantity <= 0) {
-                player.inventory.filter(x => x.itemName !== item.itemName);
+                player.inventory.filter(x => x.itemName !== item.itemName); // doesn't work yet
                 console.log(item)
                 console.log(player.inventory)
               }
               console.log(player.name+" healed for "+player.currentHP)
+              this.props.dispatch();
             }
           });
         }
@@ -124,6 +126,8 @@ class GameControl extends React.Component {
 
   render() {
     let currentlyVisibleState = null;
+    console.log("test Array: ", testLocationArray[0].locationCoordinates)
+    console.log("player location", this.props.selectedPlayerCharacter.currentLocation)
     let testLocation = testLocationArray.find(x => x.locationCoordinates === this.props.selectedPlayerCharacter.currentLocation);
     console.log(testLocation)
     if (this.props.currentGameContentScreen === "checkCharacter") {
@@ -173,8 +177,8 @@ class GameControl extends React.Component {
           </div>
           <div className="col-6">
             <MapScreen 
-            mapIcon={testLocation.locationMapIcon}
-          />
+              mapIcon={testLocation.locationMapIcon}
+            />
             <EventsLog />
           </div>
         </div>
@@ -194,7 +198,6 @@ const mapStateToProps = state => {
   return {
     currentGameContentScreen: state.currentGameContentScreen,
     selectedPlayerCharacter: state.selectedPlayerCharacter,
-
   }
 }
 
