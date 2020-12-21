@@ -32,7 +32,6 @@ const testLocationArray = [
               "quantity": 1
             });
           }
-          console.log(player.inventory)
           refreshFunc();
         }
       },
@@ -52,7 +51,7 @@ const testLocationArray = [
               }
               item.quantity-=1;
               if (item.quantity <= 0) {
-                player.inventory.filter(x => x.itemName !== item.itemName);
+                player.inventory.filter(playerItem => console.log(playerItem) && playerItem.itemName !== "Health Potion");
                 console.log(item.itemName)
                 console.log(player.inventory)
               }
@@ -77,7 +76,7 @@ const testLocationArray = [
               refreshFunc();
             }
           });
-          // refreshFunc();
+          refreshFunc();
         }
       },
       {
@@ -94,7 +93,6 @@ const testLocationArray = [
         "onClick": function goNorth(player, refreshFunc){
           player.currentLocation["y"]+=1;
           refreshFunc();
-          console.log(player)
         }
       }
     ]
@@ -111,7 +109,6 @@ const testLocationArray = [
         "onClick": function goSouth(player, refreshFunc){
           player.currentLocation["y"]-=1;
           refreshFunc();
-          console.log(player)
         }
       } 
     ]
