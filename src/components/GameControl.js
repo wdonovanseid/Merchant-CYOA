@@ -23,11 +23,16 @@ const testLocationArray = [
         "actionName": "Pick up Stick",
         "eventTrigger": true,
         "onClick": function addItem(player, action, refreshFunc){
-          action.eventTrigger = false;
-          player.inventory.push({
-            "itemName": "Stick",
-            "consume": false
-          });
+          if (player.inventory.some(x => x.itemName === "Stick")) {
+            player.inventory.find(x => x.itemName === "Stick").quantity+=1;
+          } else {
+            player.inventory.push({
+              "itemName": "Stick",
+              "consume": false,
+              "quantity": 1
+            });
+          }
+          console.log(player.inventory)
           refreshFunc();
         }
       },
@@ -47,8 +52,8 @@ const testLocationArray = [
               }
               item.quantity-=1;
               if (item.quantity <= 0) {
-                player.inventory.filter(x => x.itemName !== item.itemName); // doesn't work yet
-                console.log(item)
+                player.inventory.filter(x => x.itemName !== item.itemName);
+                console.log(item.itemName)
                 console.log(player.inventory)
               }
               refreshFunc();
@@ -72,7 +77,7 @@ const testLocationArray = [
               refreshFunc();
             }
           });
-          refreshFunc();
+          // refreshFunc();
         }
       },
       {
