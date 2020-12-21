@@ -13,6 +13,7 @@ function NewCharacterForm(props) {
       charisma: parseInt(event.target.charisma.value),
       gold: 100,
       exp: 0,
+      level: 1,
       maxHP: 10,
       currentHP: 10,
       maxMP: 5,

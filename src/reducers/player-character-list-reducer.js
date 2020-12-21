@@ -1,7 +1,7 @@
 import * as c from '../actions/ActionTypes';
 
 export default (state = {}, action) => {
-  const { name, strength, dexterity, intelligence, charisma, gold, exp, maxHP, currentHP, maxMP, currentMP, maxStamina, currentStamina, currentLocation, inventory, id } = action;
+  const { name, strength, dexterity, intelligence, charisma, gold, exp, level, maxHP, currentHP, maxMP, currentMP, maxStamina, currentStamina, currentLocation, inventory, id } = action;
   switch (action.type) {
   case c.ADD_PLAYER_CHARACTER:
     return Object.assign({}, state, {
@@ -13,6 +13,7 @@ export default (state = {}, action) => {
         charisma: charisma,
         gold: gold,
         exp: exp,
+        level: level,
         maxHP: maxHP,
         currentHP: currentHP,
         maxMP: maxMP,

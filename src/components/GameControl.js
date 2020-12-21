@@ -58,9 +58,6 @@ const testLocationArray = [
                   }
                 }
                 player.inventory = temp;
-                // player.inventory.filter(playerItem => console.log(playerItem) && playerItem.itemName == "Health Potion");
-                console.log(item.itemName)
-                console.log(player.inventory)
               }
               refreshFunc();
               console.log(player.name+" healed for "+player.currentHP)
@@ -140,6 +137,12 @@ class GameControl extends React.Component {
     this.props.dispatch(a.showLevelUpForm);
   }
 
+  handleLevelUp = (newlyLeveledPlayer) => {
+    this.props.dispatch(a.createNewPlayerCharacter(newlyLeveledPlayer));
+    this.props.dispatch(a.selectPC(newlyLeveledPlayer));
+    this.props.dispatch(a.showCurrentLocation)
+  }
+
   handleRefresh = () => {
     this.props.dispatch(a.refresh);
   }
@@ -166,6 +169,7 @@ class GameControl extends React.Component {
       currentlyVisibleState =
       <LevelUpForm
         playerCharacter={this.props.selectedPlayerCharacter}
+        onClickingLevelUp={this.handleLevelUp}
         onClickingReturnToCharacterStats={this.handleCheckCharacterStats}
       />
     } else if (this.props.currentGameContentScreen === "inBattle") {
@@ -210,6 +214,7 @@ class GameControl extends React.Component {
 GameControl.propTypes = {
   // onClickingEndGame: PropTypes.func,
   currentGameContentScreen: PropTypes.string,
+  playerCharacterList: PropTypes.object,
   selectedPlayerCharacter: PropTypes.object,
   refreshState: PropTypes.bool
 };
@@ -217,6 +222,7 @@ GameControl.propTypes = {
 const mapStateToProps = state => {
   return {
     currentGameContentScreen: state.currentGameContentScreen,
+    playerCharacterList: state.playerCharacterList,
     selectedPlayerCharacter: state.selectedPlayerCharacter,
     refreshState: state.refreshState
   }

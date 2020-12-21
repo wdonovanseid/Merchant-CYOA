@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 function LevelUpForm(props) {
   function handleLevelUpFormSubmission(event) {
     event.preventDefault();
-    props.onNewCharacterCreation({
+    props.onClickingLevelUp({
       name: props.playerCharacter.name,
       strength: parseInt(event.target.strength.value),
       dexterity: parseInt(event.target.dexterity.value),
@@ -12,6 +12,7 @@ function LevelUpForm(props) {
       charisma: parseInt(event.target.charisma.value),
       gold: props.playerCharacter.gold,
       exp: 0,
+      level: props.playerCharacter.level+=1,
       maxHP: 10,
       currentHP: 10,
       maxMP: 5,
@@ -51,6 +52,7 @@ function LevelUpForm(props) {
 
 LevelUpForm.propTypes = {
   playerCharacter: PropTypes.object,
+  onClickingLevelUp: PropTypes.func,
   onClickingReturnToCharacterStats: PropTypes.func
 };
 
