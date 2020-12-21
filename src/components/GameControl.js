@@ -99,7 +99,7 @@ const testLocationArray = [
           player.currentLocation["y"]-=1;
           console.log(player)
         }
-      }
+      } 
     ]
   }
 ]
