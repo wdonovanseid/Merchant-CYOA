@@ -5,7 +5,7 @@ import * as a from "./../actions/index.js";
 import NewCharacterForm from "./NewCharacterForm";
 import StartScreen from "./StartScreen";
 import GameControl from "./GameControl";
-import Saves from "./Saves";
+import SavedGamesScreen from "./SavedGamesScreen";
 
 class App extends React.Component {
 
@@ -28,6 +28,18 @@ class App extends React.Component {
     this.props.dispatch(a.showSavedGames);
   }
 
+  handleLoadGame = (id) => {
+    const save = this.props.playerCharacterList[id];
+    console.log(save)
+    this.props.dispatch(a.selectPC(save));
+    console.log(this.props.selectedPlayerCharacter)
+    this.props.dispatch(a.startGame);
+  }
+
+  handleDeleteGame = (id) => {
+    this.props.dispatch(a.deletePlayerCharacter(id));
+  }
+
   render() {
     let currentlyVisibleStartingScreen = null;
     if (this.props.initialScreenToShow === "NEW_CHAR_FORM") {
@@ -41,12 +53,17 @@ class App extends React.Component {
       <GameControl />
     } else if (this.props.initialScreenToShow === "SHOW_SAVED_GAMES") {
       currentlyVisibleStartingScreen =
-      <Saves />
+      <SavedGamesScreen 
+        savedGames={this.props.playerCharacterList}
+        onClickingReturnToStart={this.handleReturnToStart}
+        onClickingLoadGame={this.handleLoadGame}
+        onClickingDeleteGame={this.handleDeleteGame}
+      />
     } else {
       currentlyVisibleStartingScreen =
       <StartScreen
         onClickingStartNewGame={this.handleShowCharacterForm}
-        onClickingLoadGame={this.handleShowSavedGames}
+        onClickingShowSavedGames={this.handleShowSavedGames}
       />
     }
     return (
