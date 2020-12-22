@@ -35,6 +35,7 @@ function NewCharacterForm(props) {
       this.setState({ inputValue: e.target.value });
       this.props.onChange(e);
   };
+
   return (
     <React.Fragment>
       <h2>Make a new Character</h2>
