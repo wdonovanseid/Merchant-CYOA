@@ -11,7 +11,7 @@ import CurrentLocation from './CurrentLocation';
 import NavBar from './NavBar';
 import MapScreen from './MapScreen';
 import EventsLog from './EventsLog';
-import ReusableSavedGamesScreen from './ReusableSavedGamesScreen.js';
+import SecondarySavedGamesScreen from './SecondarySavedGamesScreen.js';
 
 const testLocationArray = [
   {
@@ -139,8 +139,7 @@ class GameControl extends React.Component {
   }
 
   handleSaveGameScreen = () => {
-    console.log(this.props.selectedPlayerCharacter)
-    this.props.dispatch(a.showSavedGames)
+    this.props.dispatch(a.showSecondarySavedGames)
   }
 
   handleLevelUp = (newlyLeveledPlayer) => {
@@ -151,13 +150,15 @@ class GameControl extends React.Component {
 
   handleNewSave = (player) => {
     this.props.dispatch(a.createNewPlayerCharacter(player));
+    console.log(this.props.playerCharacterList)
   }
 
   handleOverwriteSave = () => {
-    
+
   }
 
   handleLoadGame = (id) => {
+    console.log(id)
     const save = this.props.playerCharacterList[id];
     console.log(save)
     this.props.dispatch(a.selectPC(save));
@@ -211,7 +212,7 @@ class GameControl extends React.Component {
       />
     } else if (this.props.currentGameContentScreen === "savedGames") {
       currentlyVisibleState =
-      <ReusableSavedGamesScreen
+      <SecondarySavedGamesScreen
         player={this.props.selectedPlayerCharacter}
         savedGames={this.props.playerCharacterList}
         onClickingReturn={this.handleReturnToLocationInfo}
@@ -254,6 +255,7 @@ class GameControl extends React.Component {
 }
 
 GameControl.propTypes = {
+  initialScreenToShow: PropTypes.string,
   currentGameContentScreen: PropTypes.string,
   playerCharacterList: PropTypes.object,
   selectedPlayerCharacter: PropTypes.object,
@@ -262,6 +264,7 @@ GameControl.propTypes = {
 
 const mapStateToProps = state => {
   return {
+    initialScreenToShow: state.initialScreenToShow,
     currentGameContentScreen: state.currentGameContentScreen,
     playerCharacterList: state.playerCharacterList,
     selectedPlayerCharacter: state.selectedPlayerCharacter,

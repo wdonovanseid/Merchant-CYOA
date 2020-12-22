@@ -17,10 +17,25 @@ export const showSavedGames =({
 });
 
 export const createNewPlayerCharacter = playerCharacter => {
-  const {name, id} = playerCharacter;
+  const { name, strength, dexterity, intelligence, charisma, gold, exp, level, maxHP, currentHP, maxMP, currentMP, maxStamina, currentStamina, currentLocation, inventory, id } = playerCharacter;
   return {
     type: c.ADD_PLAYER_CHARACTER,
     name: name,
+    strength: strength,
+    dexterity: dexterity,
+    intelligence: intelligence,
+    charisma: charisma,
+    gold: gold,
+    exp: exp,
+    level: level,
+    maxHP: maxHP,
+    currentHP: currentHP,
+    maxMP: maxMP,
+    currentMP: currentMP,
+    maxStamina: maxStamina,
+    currentStamina: currentStamina,
+    currentLocation: currentLocation,
+    inventory: inventory,
     id: id
   }
 };
@@ -58,6 +73,10 @@ export const showBattleScreen = ({
 export const showCurrentLocation = ({
   type: c.SHOW_CURRENT_LOCATION
 });
+
+export const showSecondarySavedGames = ({
+  type: c.SHOW_SECONDARY_SAVED_GAMES
+})
 
 export const refresh = ({
   type: c.REFRESH

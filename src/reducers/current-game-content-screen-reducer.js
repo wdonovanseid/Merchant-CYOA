@@ -17,6 +17,9 @@ export default (state = "locationInfo", action) => {
     case c.SHOW_CURRENT_LOCATION:
       const newState5 = "locationInfo";
       return newState5;
+    case c.SHOW_SECONDARY_SAVED_GAMES:
+      const newState6 = "savedGames";
+      return newState6;
     default:
       return state;
     }

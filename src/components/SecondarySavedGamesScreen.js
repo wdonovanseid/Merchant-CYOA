@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function SavedGamesScreen(props) {
+function SecondarySavedGamesScreen(props) {
   let currentSaves;
   if (Object.values(props.savedGames).length < 1) {
     currentSaves =
@@ -13,7 +13,7 @@ function SavedGamesScreen(props) {
         <li key={index}>
           {save.name} LVL: {save.level}
           <button onClick={() => props.onClickingLoadGame(save.id)}>Load Game</button>
-          {props.player != null && <button onClick={() => props.onClickingOverwriteSave(props.player)}>Overwrite Save</button>}
+          <button onClick={() => props.onClickingOverwriteSave(props.player)}>Overwrite Save</button>
           <button onClick={() => props.onClickingDeleteGame(save.id)}>Delete Game</button>
         </li>
       )}
@@ -23,14 +23,13 @@ function SavedGamesScreen(props) {
     <React.Fragment>
         <h4>Saves</h4>
         {currentSaves}
-        {props.player != null && <button onClick={() => props.onClickingNewSave(props.player)}>Save Game</button>}
-        <button onClick={() => props.onClickingNewSave(props.player)}>Save Game</button>
+        <button onClick={() => props.onClickingNewSave(props.player)}>New Save Game</button>
         <button onClick={props.onClickingReturn}>Return</button>
     </React.Fragment>
   );
 }
 
-SavedGamesScreen.propTypes = {
+SecondarySavedGamesScreen.propTypes = {
   player: PropTypes.object,
   savedGames: PropTypes.object,
   onClickingReturn: PropTypes.func,
@@ -40,4 +39,4 @@ SavedGamesScreen.propTypes = {
   onClickingOverwriteSave: PropTypes.func
 };
 
-export default SavedGamesScreen;
+export default SecondarySavedGamesScreen;

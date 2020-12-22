@@ -5,7 +5,7 @@ import * as a from "./../actions/index.js";
 import NewCharacterForm from "./NewCharacterForm";
 import StartScreen from "./StartScreen";
 import GameControl from "./GameControl";
-import ReusableSavedGamesScreen from "./ReusableSavedGamesScreen";
+import InitialSavedGamesScreen from "./InitialSavedGamesScreen";
 
 class App extends React.Component {
 
@@ -53,7 +53,7 @@ class App extends React.Component {
       <GameControl />
     } else if (this.props.initialScreenToShow === "SHOW_SAVED_GAMES") {
       currentlyVisibleStartingScreen =
-      <ReusableSavedGamesScreen 
+      <InitialSavedGamesScreen 
         savedGames={this.props.playerCharacterList}
         onClickingReturn={this.handleReturnToStart}
         onClickingLoadGame={this.handleLoadGame}
