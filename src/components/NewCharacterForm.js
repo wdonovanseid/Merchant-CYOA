@@ -14,6 +14,7 @@ const setNativeValue = (element, value) => {
   }
 }
 
+
 const addToInput = (valueToAdd) => {
   setNativeValue(this.inputElement, +this.state.inputValue + +valueToAdd);
   this.inputElement.dispatchEvent(new Event('input', { bubbles: true }));
