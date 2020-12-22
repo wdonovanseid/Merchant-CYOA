@@ -25,31 +25,52 @@ function NewCharacterForm(props) {
       id: v4()
     });
   }
+  function plusStat(stat) {
+    if (props.bonusPoints > 0) {
+
+    }
+  }
+  function subtractStat(stat) {
+    
+  }
   return (
     <React.Fragment>
       <h2>Make a new Character</h2>
         <form onSubmit={handleNewCharacterFormSubmission}>
-          <p>Name: <input
-            type='text'
-            name='name'
-            placeholder='Name'
-            required /></p>
-          <p>Strength: <input
-            type='number'
-            name='strength'
-            defaultValue={1} /></p>
+          <p>Name:
+            <input
+              type='text'
+              name='name'
+              placeholder='Name'
+              required
+            />
+            Bonus Points: {props.bonusPoints}
+          </p>
+          <p>Strength:
+            <input
+              type='number' readOnly
+              name='strength'
+              defaultValue={1}
+              min={1}
+            />
+          </p>
+            {/* <button onClick={() => subtractStat()}>-</button>
+            <button onClick={() => plusStat()}>+</button> */}
           <p>Dexterity: <input
             type='number'
             name='dexterity'
-            defaultValue={1} /></p>
+            defaultValue={1}
+            min={1} /></p>
           <p>Intelligence: <input
             type='number'
             name='intelligence'
-            defaultValue={1} /></p>
+            defaultValue={1}
+            min={1} /></p>
           <p>Charisma: <input
             type='number'
             name='charisma'
-            defaultValue={1} /></p>
+            defaultValue={1}
+            min={1} /></p>
           <button type="submit" className="btn btn-primary">Start Game</button>
         </form>
       <button type="button" onClick={props.onClickingReturnToStart}>Return to Start Screen</button>

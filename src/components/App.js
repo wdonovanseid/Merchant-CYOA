@@ -12,6 +12,7 @@ class App extends React.Component {
   handleCreatingNewCharacter = (newPlayerCharacter) => {
     this.props.dispatch(a.selectPC(newPlayerCharacter));
     this.props.dispatch(a.startGame);
+    this.props.dispatch(a.showCurrentLocation);
   }
 
   handleReturnToStart = () => {
@@ -45,6 +46,7 @@ class App extends React.Component {
       <NewCharacterForm
         onNewCharacterCreation={this.handleCreatingNewCharacter}
         onClickingReturnToStart={this.handleReturnToStart}
+        bonusPoints={10}
       />
     } else if (this.props.initialScreenToShow === "START_GAME") {
       currentlyVisibleStartingScreen =

@@ -64,9 +64,9 @@ export const createNewSave = playerCharacter => {
 //   }
 // };
 
-export const deleteSave = (saveId) => ({
+export const deleteSave = (id) => ({
   type: c.DELETE_SAVE,
-  saveId
+  id
 });
 
 export const selectPC = (pc) => ({

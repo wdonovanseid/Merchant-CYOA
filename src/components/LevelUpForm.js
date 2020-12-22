@@ -30,19 +30,23 @@ function LevelUpForm(props) {
             <p>Strength: <input
               type='number'
               name='strength'
-              defaultValue={props.playerCharacter.strength} /></p>
+              defaultValue={props.playerCharacter.strength}
+              min={props.playerCharacter.strength} /></p>
             <p>Dexterity: <input
               type='number'
               name='dexterity'
-              defaultValue={props.playerCharacter.dexterity} /></p>
+              defaultValue={props.playerCharacter.dexterity}
+              min={props.playerCharacter.dexterity} /></p>
             <p>Intelligence: <input
               type='number'
               name='intelligence'
-              defaultValue={props.playerCharacter.intelligence} /></p>
+              defaultValue={props.playerCharacter.intelligence}
+              min={props.playerCharacter.intelligence} /></p>
             <p>Charisma: <input
               type='number'
               name='charisma'
-              defaultValue={props.playerCharacter.charisma} /></p>
+              defaultValue={props.playerCharacter.charisma}
+              min={props.playerCharacter.charisma} /></p>
           <button type="submit" className="btn btn-primary">Level Up!</button>
         </form>
         <button type="button" onClick={props.onClickingReturnToCharacterStats}>Return to Character Stats</button>
