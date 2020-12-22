@@ -41,3 +41,7 @@ playerCharacter
 	RespawnPoint?
 	Skills?
 }
+
+Things to work on:
+location api
+each character can only have one save currently

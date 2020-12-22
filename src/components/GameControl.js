@@ -139,35 +139,31 @@ class GameControl extends React.Component {
   }
 
   handleSaveGameScreen = () => {
-    this.props.dispatch(a.showSecondarySavedGames)
+    this.props.dispatch(a.showSecondarySavedGames);
   }
 
   handleLevelUp = (newlyLeveledPlayer) => {
-    // this.props.dispatch(a.createNewPlayerCharacter(newlyLeveledPlayer));
     this.props.dispatch(a.selectPC(newlyLeveledPlayer));
     this.props.dispatch(a.showCurrentLocation)
   }
 
   handleNewSave = (player) => {
-    this.props.dispatch(a.createNewPlayerCharacter(player));
-    console.log(this.props.playerCharacterList)
+    this.props.dispatch(a.createNewSave(player));
   }
 
-  handleOverwriteSave = () => {
-
+  handleOverwriteSave = (player) => {
+    // this.props.dispatch(a.updateSave(player));
   }
 
   handleLoadGame = (id) => {
-    console.log(id)
     const save = this.props.playerCharacterList[id];
-    console.log(save)
     this.props.dispatch(a.selectPC(save));
-    console.log(this.props.selectedPlayerCharacter)
     this.props.dispatch(a.startGame);
+    this.props.dispatch(a.showCurrentLocation)
   }
 
   handleDeleteGame = (id) => {
-    this.props.dispatch(a.deletePlayerCharacter(id));
+    this.props.dispatch(a.deleteSave(id));
   }
 
   handleReturnToStart = () => {

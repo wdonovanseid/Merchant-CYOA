@@ -16,10 +16,10 @@ export const showSavedGames =({
   type: c.SHOW_SAVED_GAMES
 });
 
-export const createNewPlayerCharacter = playerCharacter => {
+export const createNewSave = playerCharacter => {
   const { name, strength, dexterity, intelligence, charisma, gold, exp, level, maxHP, currentHP, maxMP, currentMP, maxStamina, currentStamina, currentLocation, inventory, id } = playerCharacter;
   return {
-    type: c.ADD_PLAYER_CHARACTER,
+    type: c.ADD_NEW_SAVE,
     name: name,
     strength: strength,
     dexterity: dexterity,
@@ -40,9 +40,33 @@ export const createNewPlayerCharacter = playerCharacter => {
   }
 };
 
-export const deletePlayerCharacter = (id) => ({
-  type: c.DELETE_PLAYER_CHARACTER,
-  id
+// export const updateSave = (playerCharacter) => {
+//   const { name, strength, dexterity, intelligence, charisma, gold, exp, level, maxHP, currentHP, maxMP, currentMP, maxStamina, currentStamina, currentLocation, inventory, id } = playerCharacter;
+//   return {
+//     type: c.UPDATE_SAVE,
+//     name: name,
+//     strength: strength,
+//     dexterity: dexterity,
+//     intelligence: intelligence,
+//     charisma: charisma,
+//     gold: gold,
+//     exp: exp,
+//     level: level,
+//     maxHP: maxHP,
+//     currentHP: currentHP,
+//     maxMP: maxMP,
+//     currentMP: currentMP,
+//     maxStamina: maxStamina,
+//     currentStamina: currentStamina,
+//     currentLocation: currentLocation,
+//     inventory: inventory,
+//     id: id,
+//   }
+// };
+
+export const deleteSave = (saveId) => ({
+  type: c.DELETE_SAVE,
+  saveId
 });
 
 export const selectPC = (pc) => ({

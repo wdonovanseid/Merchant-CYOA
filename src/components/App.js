@@ -10,7 +10,6 @@ import InitialSavedGamesScreen from "./InitialSavedGamesScreen";
 class App extends React.Component {
 
   handleCreatingNewCharacter = (newPlayerCharacter) => {
-    // this.props.dispatch(a.createNewPlayerCharacter(newPlayerCharacter));
     this.props.dispatch(a.selectPC(newPlayerCharacter));
     this.props.dispatch(a.startGame);
   }
@@ -30,14 +29,13 @@ class App extends React.Component {
 
   handleLoadGame = (id) => {
     const save = this.props.playerCharacterList[id];
-    console.log(save)
     this.props.dispatch(a.selectPC(save));
-    console.log(this.props.selectedPlayerCharacter)
     this.props.dispatch(a.startGame);
+    this.props.dispatch(a.showCurrentLocation);
   }
 
   handleDeleteGame = (id) => {
-    this.props.dispatch(a.deletePlayerCharacter(id));
+    this.props.dispatch(a.deleteSave(id));
   }
 
   render() {

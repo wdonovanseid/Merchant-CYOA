@@ -3,7 +3,7 @@ import * as c from '../actions/ActionTypes';
 export default (state = {}, action) => {
   const { name, strength, dexterity, intelligence, charisma, gold, exp, level, maxHP, currentHP, maxMP, currentMP, maxStamina, currentStamina, currentLocation, inventory, id } = action;
   switch (action.type) {
-  case c.ADD_PLAYER_CHARACTER:
+  case c.ADD_NEW_SAVE:
     return Object.assign({}, state, {
       [id]: {
         name: name,
@@ -25,7 +25,7 @@ export default (state = {}, action) => {
         id: id
       }
     });
-  case c.DELETE_PLAYER_CHARACTER:
+  case c.DELETE_SAVE:
     const newState = { ...state };
     delete newState[id];
     return newState;
