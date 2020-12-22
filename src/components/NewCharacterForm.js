@@ -25,6 +25,16 @@ function NewCharacterForm(props) {
       id: v4()
     });
   }
+  addToInput = (valueToAdd) => {
+    this.setNativeValue(this.inputElement, +this.state.inputValue + +valueToAdd);
+    this.inputElement.dispatchEvent(new Event('input', { bubbles: true }));
+  };
+
+  handleChange = e => {
+      console.log(e);
+      this.setState({ inputValue: e.target.value });
+      this.props.onChange(e);
+  };
   return (
     <React.Fragment>
       <h2>Make a new Character</h2>
