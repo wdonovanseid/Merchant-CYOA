@@ -11,6 +11,7 @@ import CurrentLocation from './CurrentLocation';
 import NavBar from './NavBar';
 import MapScreen from './MapScreen';
 import EventsLog from './EventsLog';
+import ReusableSavedGamesScreen from './ReusableSavedGamesScreen.js';
 
 const testLocationArray = [
   {
@@ -137,10 +138,35 @@ class GameControl extends React.Component {
     this.props.dispatch(a.showLevelUpForm);
   }
 
+  handleSaveGameScreen = () => {
+    console.log(this.props.selectedPlayerCharacter)
+    this.props.dispatch(a.showSavedGames)
+  }
+
   handleLevelUp = (newlyLeveledPlayer) => {
-    this.props.dispatch(a.createNewPlayerCharacter(newlyLeveledPlayer));
+    // this.props.dispatch(a.createNewPlayerCharacter(newlyLeveledPlayer));
     this.props.dispatch(a.selectPC(newlyLeveledPlayer));
     this.props.dispatch(a.showCurrentLocation)
+  }
+
+  handleNewSave = (player) => {
+    this.props.dispatch(a.createNewPlayerCharacter(player));
+  }
+
+  handleOverwriteSave = () => {
+    
+  }
+
+  handleLoadGame = (id) => {
+    const save = this.props.playerCharacterList[id];
+    console.log(save)
+    this.props.dispatch(a.selectPC(save));
+    console.log(this.props.selectedPlayerCharacter)
+    this.props.dispatch(a.startGame);
+  }
+
+  handleDeleteGame = (id) => {
+    this.props.dispatch(a.deletePlayerCharacter(id));
   }
 
   handleReturnToStart = () => {
@@ -183,6 +209,17 @@ class GameControl extends React.Component {
         playerCharacter={this.props.selectedPlayerCharacter}
         enemyCharacters={this.props.currentEnemyEncounter}
       />
+    } else if (this.props.currentGameContentScreen === "savedGames") {
+      currentlyVisibleState =
+      <ReusableSavedGamesScreen
+        player={this.props.selectedPlayerCharacter}
+        savedGames={this.props.playerCharacterList}
+        onClickingReturn={this.handleReturnToLocationInfo}
+        onClickingLoadGame={this.handleLoadGame}
+        onClickingDeleteGame={this.handleDeleteGame}
+        onClickingNewSave={this.handleNewSave}
+        onClickingOverwriteSave={this.handleOverwriteSave}
+      />
     } else {
       currentlyVisibleState =
       <CurrentLocation
@@ -197,7 +234,7 @@ class GameControl extends React.Component {
           expCheck={this.props.selectedPlayerCharacter.exp}
           onClickingCharacterStats={this.handleCheckCharacterStats}
           onClickingInventory={this.handleCheckInventory}
-          // onClickingSaveGame={this.handleSaveGameScreen}
+          onClickingShowSavedGames={this.handleSaveGameScreen}
           onClickingEndGame={this.handleReturnToStart}
         />
         <div className="row">

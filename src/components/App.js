@@ -5,12 +5,12 @@ import * as a from "./../actions/index.js";
 import NewCharacterForm from "./NewCharacterForm";
 import StartScreen from "./StartScreen";
 import GameControl from "./GameControl";
-import SavedGamesScreen from "./SavedGamesScreen";
+import ReusableSavedGamesScreen from "./ReusableSavedGamesScreen";
 
 class App extends React.Component {
 
   handleCreatingNewCharacter = (newPlayerCharacter) => {
-    this.props.dispatch(a.createNewPlayerCharacter(newPlayerCharacter));
+    // this.props.dispatch(a.createNewPlayerCharacter(newPlayerCharacter));
     this.props.dispatch(a.selectPC(newPlayerCharacter));
     this.props.dispatch(a.startGame);
   }
@@ -53,9 +53,9 @@ class App extends React.Component {
       <GameControl />
     } else if (this.props.initialScreenToShow === "SHOW_SAVED_GAMES") {
       currentlyVisibleStartingScreen =
-      <SavedGamesScreen 
+      <ReusableSavedGamesScreen 
         savedGames={this.props.playerCharacterList}
-        onClickingReturnToStart={this.handleReturnToStart}
+        onClickingReturn={this.handleReturnToStart}
         onClickingLoadGame={this.handleLoadGame}
         onClickingDeleteGame={this.handleDeleteGame}
       />
@@ -77,7 +77,7 @@ class App extends React.Component {
 App.propTypes = {
   initialScreenToShow: PropTypes.string,
   playerCharacterList: PropTypes.object,
-  selectedPlayerCharacter: PropTypes.object
+  selectedPlayerCharacter: PropTypes.object,
 }
 
 const mapStateToProps = state => {
