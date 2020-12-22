@@ -2,28 +2,27 @@ import React from "react";
 import { v4 } from 'uuid';
 import PropTypes from "prop-types";
 
-const setNativeValue = (element, value) => {
-  const valueSetter = Object.getOwnPropertyDescriptor(element, 'value').set;
-  const prototype = Object.getPrototypeOf(element);
-  const prototypeValueSetter = Object.getOwnPropertyDescriptor(prototype, 'value').set;
+// const setNativeValue = (element, value) => {
+//   const valueSetter = Object.getOwnPropertyDescriptor(element, 'value').set;
+//   const prototype = Object.getPrototypeOf(element);
+//   const prototypeValueSetter = Object.getOwnPropertyDescriptor(prototype, 'value').set;
 
-  if (valueSetter && valueSetter !== prototypeValueSetter) {
-      prototypeValueSetter.call(element, value);
-  } else {
-      valueSetter.call(element, value);
-  }
-}
+//   if (valueSetter && valueSetter !== prototypeValueSetter) {
+//       prototypeValueSetter.call(element, value);
+//   } else {
+//       valueSetter.call(element, value);
+//   }
+// }
 
+// const addToInput = (valueToAdd) => {
+//   setNativeValue(this.inputElement, +this.state.inputValue + +valueToAdd);
+//   this.inputElement.dispatchEvent(new Event('input', { bubbles: true }));
+// };
 
-const addToInput = (valueToAdd) => {
-  setNativeValue(this.inputElement, +this.state.inputValue + +valueToAdd);
-  this.inputElement.dispatchEvent(new Event('input', { bubbles: true }));
-};
-
-const handleChange = (event) => {
-  this.setState({ inputValue: event.target.value });
-  this.props.onChange(event);
-};
+// const handleChange = (event) => {
+//   this.setState({ inputValue: event.target.value });
+//   this.props.onChange(event);
+// };
 
 function NewCharacterForm(props) {
   function handleNewCharacterFormSubmission(event) {
@@ -48,6 +47,15 @@ function NewCharacterForm(props) {
       id: v4()
     });
   }
+  // function handleChange(event){
+  //   props.bonusPoints-=event.target.value; 
+  //   // this.setState({ inputValue: event.target.value });
+  //   this.props.onChange(event);
+  // };
+  function addToInput(valueToAdd){
+  //   setNativeValue(this.inputElement, +this.state.inputValue + +valueToAdd);
+  //   this.inputElement.dispatchEvent(new Event('input', { bubbles: true }));
+  };
   return (
     <React.Fragment>
       <h2>Make a new Character</h2>
@@ -62,17 +70,17 @@ function NewCharacterForm(props) {
             Bonus Points: {props.bonusPoints}
           </p>
           <p>Strength:
-            <button type="button" onClick={() => addToInput(-1)}>-</button>
+            <button type="button" name='strength' onClick={() => addToInput(-1)}>-</button>
             <input
               readOnly
-              ref={input => {this.inputElement=input}}
-              onChange={handleChange}
+              // ref={input => {props.bonusPoints-=input}}
+              // onChange={handleChange}
               type='number'
               name='strength'
               defaultValue={1}
               min={1}
             />
-            <button type="button" onClick={() => addToInput(+1)}>+</button>
+            <button type="button" name='strength' onClick={() => addToInput(+1)}>+</button>
           </p>
           <p>Dexterity:
             <input
