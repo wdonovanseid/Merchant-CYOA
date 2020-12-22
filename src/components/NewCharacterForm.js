@@ -2,6 +2,28 @@ import React from "react";
 import { v4 } from 'uuid';
 import PropTypes from "prop-types";
 
+const setNativeValue = (element, value) => {
+  const valueSetter = Object.getOwnPropertyDescriptor(element, 'value').set;
+  const prototype = Object.getPrototypeOf(element);
+  const prototypeValueSetter = Object.getOwnPropertyDescriptor(prototype, 'value').set;
+
+  if (valueSetter && valueSetter !== prototypeValueSetter) {
+      prototypeValueSetter.call(element, value);
+  } else {
+      valueSetter.call(element, value);
+  }
+}
+
+const addToInput = (valueToAdd) => {
+  setNativeValue(this.inputElement, +this.state.inputValue + +valueToAdd);
+  this.inputElement.dispatchEvent(new Event('input', { bubbles: true }));
+};
+
+const handleChange = (event) => {
+  this.setState({ inputValue: event.target.value });
+  this.props.onChange(event);
+};
+
 function NewCharacterForm(props) {
   function handleNewCharacterFormSubmission(event) {
     event.preventDefault();
@@ -25,17 +47,6 @@ function NewCharacterForm(props) {
       id: v4()
     });
   }
-  addToInput = (valueToAdd) => {
-    this.setNativeValue(this.inputElement, +this.state.inputValue + +valueToAdd);
-    this.inputElement.dispatchEvent(new Event('input', { bubbles: true }));
-  };
-
-  handleChange = e => {
-      console.log(e);
-      this.setState({ inputValue: e.target.value });
-      this.props.onChange(e);
-  };
-
   return (
     <React.Fragment>
       <h2>Make a new Character</h2>
@@ -50,17 +61,17 @@ function NewCharacterForm(props) {
             Bonus Points: {props.bonusPoints}
           </p>
           <p>Strength:
-            <button type="button" onClick={() => this.addToInput(-1)}>-</button>
+            <button type="button" onClick={() => addToInput(-1)}>-</button>
             <input
               readOnly
               ref={input => {this.inputElement=input}}
-              onChange={this.handleChange}
+              onChange={handleChange}
               type='number'
               name='strength'
               defaultValue={1}
               min={1}
             />
-            <button type="button" onClick={() => this.addToInput(+1)}>+</button>
+            <button type="button" onClick={() => addToInput(+1)}>+</button>
           </p>
           <p>Dexterity:
             <input
