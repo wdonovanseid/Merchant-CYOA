@@ -25,9 +25,6 @@ function NewCharacterForm(props) {
       id: v4()
     });
   }
-  handleChange(event){
-    props.bonusPoints-=event.target.value;
-  }
   return (
     <React.Fragment>
       <h2>Make a new Character</h2>
@@ -42,13 +39,17 @@ function NewCharacterForm(props) {
             Bonus Points: {props.bonusPoints}
           </p>
           <p>Strength:
+            <button type="button" onClick={() => this.addToInput(-1)}>-</button>
             <input
+              readOnly
+              ref={input => {this.inputElement=input}}
+              onChange={this.handleChange}
               type='number'
               name='strength'
               defaultValue={1}
               min={1}
-              onChange={this.handleChange}
             />
+            <button type="button" onClick={() => this.addToInput(+1)}>+</button>
           </p>
           <p>Dexterity:
             <input
